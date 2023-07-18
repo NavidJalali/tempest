@@ -127,8 +127,6 @@ impl EchoNode {
 
                         _ => (),
                     }
-                } else {
-                    bail!("Received message for another node.")
                 }
             }
         }
