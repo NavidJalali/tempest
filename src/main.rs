@@ -67,7 +67,7 @@ impl EchoNode {
                         node_ids: _,
                     } => {
                         self.state = EchoNodeState::Ready {
-                            self_id: node_id.into(),
+                            self_id: node_id,
                             message_id: 1,
                         };
                         let reply = Message {
@@ -103,7 +103,7 @@ impl EchoNode {
                                 source: message.destination,
                                 destination: message.source,
                                 body: Body {
-                                    id: Some(message_id.clone()),
+                                    id: Some(*message_id),
                                     in_reply_to: message.body.id,
                                     payload: Payload::EchoOk { echo },
                                 },
@@ -114,10 +114,7 @@ impl EchoNode {
 
                             output.write_all(b"\n").context("New Line")?;
 
-                            self.state = EchoNodeState::Ready {
-                                self_id: self_id.clone(),
-                                message_id: *message_id + 1,
-                            };
+                            *message_id += 1;
                         }
 
                         Payload::Init { .. } => {
