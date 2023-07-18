@@ -1,0 +1,157 @@
+2023-07-18 03:32:49,773{GMT}	INFO	[jepsen test runner] jepsen.core: Command line:
+lein run test -w echo --bin target/debug/tempest --node-count 1 --time-limit 10
+2023-07-18 03:32:49,958{GMT}	INFO	[jepsen test runner] jepsen.core: Running test:
+{:args []
+ :remote
+ #jepsen.control.retry.Remote{:remote #jepsen.control.scp.Remote{:cmd-remote #jepsen.control.sshj.SSHJRemote{:concurrency-limit 6,
+                                                                                                             :conn-spec nil,
+                                                                                                             :client nil,
+                                                                                                             :semaphore nil},
+                                                                 :conn-spec nil},
+                              :conn nil}
+ :log-net-send false
+ :node-count 1
+ :availability nil
+ :max-txn-length 4
+ :concurrency 1
+ :db
+ #object[maelstrom.db$db$reify__16142
+         "0x68f67bbd"
+         "maelstrom.db$db$reify__16142@68f67bbd"]
+ :max-writes-per-key 16
+ :leave-db-running? false
+ :name "echo"
+ :logging-json? false
+ :start-time
+ #object[org.joda.time.DateTime "0x4a03c4bc" "2023-07-18T03:32:49.724+02:00"]
+ :nemesis-interval 10
+ :net
+ #object[maelstrom.net$jepsen_net$reify__15251
+         "0x3d0c88f4"
+         "maelstrom.net$jepsen_net$reify__15251@3d0c88f4"]
+ :client
+ #object[maelstrom.workload.echo$client$reify__16863
+         "0x5aad4194"
+         "maelstrom.workload.echo$client$reify__16863@5aad4194"]
+ :barrier
+ #object[java.util.concurrent.CyclicBarrier
+         "0x50a1c2f3"
+         "java.util.concurrent.CyclicBarrier@50a1c2f3"]
+ :log-stderr false
+ :pure-generators true
+ :ssh {:dummy? true}
+ :rate 5
+ :checker
+ #object[jepsen.checker$compose$reify__11881
+         "0x453ca7f"
+         "jepsen.checker$compose$reify__11881@453ca7f"]
+ :argv
+ ("test"
+  "-w"
+  "echo"
+  "--bin"
+  "target/debug/tempest"
+  "--node-count"
+  "1"
+  "--time-limit"
+  "10")
+ :nemesis
+ (jepsen.nemesis.ReflCompose
+  {:fm {:start-partition 0,
+        :stop-partition 0,
+        :kill 1,
+        :start 1,
+        :pause 1,
+        :resume 1},
+   :nemeses [#unprintable "jepsen.nemesis.combined$partition_nemesis$reify__16416@5d41b929"
+             #unprintable "jepsen.nemesis.combined$db_nemesis$reify__16397@6dd0e2f4"]})
+ :nodes ["n0"]
+ :test-count 1
+ :latency {:mean 0, :dist :constant}
+ :bin "target/debug/tempest"
+ :generator
+ (jepsen.generator.TimeLimit
+  {:limit 10000000000,
+   :cutoff nil,
+   :gen (jepsen.generator.Any
+         {:gens [(jepsen.generator.OnThreads
+                  {:f #{:nemesis},
+                   :context-filter #object[jepsen.generator.context$make_thread_filter$lazy_filter__9167
+                                           "0x4ce66169"
+                                           "jepsen.generator.context$make_thread_filter$lazy_filter__9167@4ce66169"],
+                   :gen nil})
+                 (jepsen.generator.OnThreads
+                  {:f #jepsen.generator.context.AllBut{:element :nemesis},
+                   :context-filter #object[jepsen.generator.context$make_thread_filter$lazy_filter__9167
+                                           "0x53d0cf4d"
+                                           "jepsen.generator.context$make_thread_filter$lazy_filter__9167@53d0cf4d"],
+                   :gen (jepsen.generator.Stagger
+                         {:dt 400000000,
+                          :next-time nil,
+                          :gen (jepsen.generator.EachThread
+                                {:fresh-gen #object[maelstrom.workload.echo$workload$fn__16882
+                                                    "0x3c6c87fa"
+                                                    "maelstrom.workload.echo$workload$fn__16882@3c6c87fa"],
+                                 :context-filters #object[clojure.core$promise$reify__8591
+                                                          "0xd7645b2"
+                                                          {:status :pending,
+                                                           :val nil}],
+                                 :gens {}})})})]})})
+ :log-net-recv false
+ :os
+ #object[maelstrom.net$jepsen_os$reify__15254
+         "0x72e4905c"
+         "maelstrom.net$jepsen_os$reify__15254@72e4905c"]
+ :time-limit 10
+ :workload :echo
+ :consistency-models [:strict-serializable]
+ :topology :grid}
+
+2023-07-18 03:32:57,302{GMT}	INFO	[jepsen node n0] maelstrom.net: Starting Maelstrom network
+2023-07-18 03:32:57,305{GMT}	INFO	[jepsen test runner] jepsen.db: Tearing down DB
+2023-07-18 03:32:57,310{GMT}	INFO	[jepsen test runner] jepsen.db: Setting up DB
+2023-07-18 03:32:57,322{GMT}	INFO	[jepsen node n0] maelstrom.service: Starting services: (lin-kv lin-tso lww-kv seq-kv)
+2023-07-18 03:32:57,327{GMT}	INFO	[jepsen node n0] maelstrom.db: Setting up n0
+2023-07-18 03:32:57,329{GMT}	INFO	[jepsen node n0] maelstrom.process: launching target/debug/tempest []
+2023-07-18 03:32:57,390{GMT}	INFO	[jepsen test runner] jepsen.core: Relative time begins now
+2023-07-18 03:32:57,431{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:echo	"Please echo 84"
+2023-07-18 03:33:02,438{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:info	:echo	"Please echo 84"	:net-timeout
+2023-07-18 03:33:02,442{GMT}	INFO	[jepsen worker 0] jepsen.util: 1	:invoke	:echo	"Please echo 126"
+2023-07-18 03:33:07,445{GMT}	INFO	[jepsen worker 0] jepsen.util: 1	:info	:echo	"Please echo 126"	:net-timeout
+2023-07-18 03:33:07,481{GMT}	INFO	[jepsen test runner] jepsen.core: Run complete, writing
+2023-07-18 03:33:07,575{GMT}	INFO	[jepsen node n0] maelstrom.db: Tearing down n0
+2023-07-18 03:33:09,334{GMT}	INFO	[jepsen node n0] maelstrom.net: Shutting down Maelstrom network
+2023-07-18 03:33:09,336{GMT}	INFO	[jepsen test runner] jepsen.core: Analyzing...
+2023-07-18 03:33:09,690{GMT}	INFO	[jepsen test runner] jepsen.core: Analysis complete
+2023-07-18 03:33:09,720{GMT}	INFO	[jepsen results] jepsen.store: Wrote /home/navid/projects/tempest/store/echo/20230718T033249.724+0200/results.edn
+2023-07-18 03:33:09,749{GMT}	INFO	[jepsen test runner] jepsen.core: {:perf {:latency-graph {:valid? true},
+        :rate-graph {:valid? true},
+        :valid? true},
+ :timeline {:valid? true},
+ :exceptions {:valid? true},
+ :stats {:valid? false,
+         :count 2,
+         :ok-count 0,
+         :fail-count 0,
+         :info-count 2,
+         :by-f {:echo {:valid? false,
+                       :count 2,
+                       :ok-count 0,
+                       :fail-count 0,
+                       :info-count 2}}},
+ :availability {:valid? true, :ok-fraction 0.0},
+ :net {:all {:send-count 4,
+             :recv-count 4,
+             :msg-count 4,
+             :msgs-per-op 2.0},
+       :clients {:send-count 4, :recv-count 4, :msg-count 4},
+       :servers {:send-count 0,
+                 :recv-count 0,
+                 :msg-count 0,
+                 :msgs-per-op 0.0},
+       :valid? true},
+ :workload {:valid? true, :errors ()},
+ :valid? false}
+
+
+Analysis invalid! (ﾉಥ益ಥ）ﾉ ┻━┻
