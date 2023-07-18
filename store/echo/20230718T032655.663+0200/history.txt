@@ -1,4 +1,0 @@
-0	:invoke	:echo	"Please echo 88"
-0	:info	:echo	"Please echo 88"	:net-timeout
-1	:invoke	:echo	"Please echo 18"
-1	:info	:echo	"Please echo 18"	:net-timeout
